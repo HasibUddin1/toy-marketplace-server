@@ -29,6 +29,11 @@ async function run() {
 
     const toyCarsCollection = client.db('toyCarsDB').collection('toyCars')
 
+    app.get('/toyCars', async (req, res) => {
+        const result = await toyCarsCollection.find().toArray()
+        res.send(result)
+    })
+
     app.get('/sportsCar', async (req, res) => {
         const result = await toyCarsCollection.find({category: "sports car"}).toArray()
         res.send(result)
