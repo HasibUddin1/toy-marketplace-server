@@ -30,7 +30,7 @@ async function run() {
     const toyCarsCollection = client.db('toyCarsDB').collection('toyCars')
 
     app.get('/toyCars', async (req, res) => {
-        const result = await toyCarsCollection.find().toArray()
+        const result = await toyCarsCollection.find().limit(20).toArray()
         res.send(result)
     })
 
