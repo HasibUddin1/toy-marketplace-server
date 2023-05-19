@@ -57,6 +57,11 @@ async function run() {
         res.send(result)
     })
 
+    app.post('/toyCars', async (req, res) => {
+      const toyInfo = req.body
+      console.log(toyInfo)
+    })
+
 
 
 
