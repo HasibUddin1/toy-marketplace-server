@@ -30,31 +30,37 @@ async function run() {
     const toyCarsCollection = client.db('toyCarsDB').collection('toyCars')
 
     app.get('/toyCars', async (req, res) => {
-        const result = await toyCarsCollection.find().limit(20).toArray()
-        res.send(result)
+      const result = await toyCarsCollection.find().limit(20).toArray()
+      res.send(result)
     })
 
     app.get('/toyCars/:id', async (req, res) => {
-        const id = req.params.id
-        // console.log(id)
-        const query = {_id: new ObjectId(id)}
-        const result = await toyCarsCollection.findOne(query)
-        res.send(result)
+      const id = req.params.id
+      // console.log(id)
+      const query = { _id: new ObjectId(id) }
+      const result = await toyCarsCollection.findOne(query)
+      res.send(result)
     })
 
     app.get('/sportsCar', async (req, res) => {
-        const result = await toyCarsCollection.find({category: "sports car"}).toArray()
-        res.send(result)
+      const result = await toyCarsCollection.find({ category: "sports car" }).toArray()
+      res.send(result)
     })
 
     app.get('/trucks', async (req, res) => {
-        const result = await toyCarsCollection.find({category: "truck"}).toArray()
-        res.send(result)
+      const result = await toyCarsCollection.find({ category: "truck" }).toArray()
+      res.send(result)
     })
 
     app.get('/racingCars', async (req, res) => {
-        const result = await toyCarsCollection.find({category: "racing car"}).toArray()
-        res.send(result)
+      const result = await toyCarsCollection.find({ category: "racing car" }).toArray()
+      res.send(result)
+    })
+
+    app.get('/myToys/:email', async (req, res) => {
+      console.log(req.params.email)
+      const result = await toyCarsCollection.find({ sellerEmail: req.params.email }).toArray()
+      res.send(result)
     })
 
     app.post('/toyCars', async (req, res) => {
@@ -80,9 +86,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Toy Cars server is running')
+  res.send('Toy Cars server is running')
 })
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
