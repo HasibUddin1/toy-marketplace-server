@@ -63,6 +63,15 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/myToysByPricesAscending/:email', async (req, res) => {
+      const result = await toyCarsCollection.find({ sellerEmail: req.params.email }).sort({ price: 1 }).toArray()
+      res.send(result)
+    })
+    app.get('/myToysByPricesDescending/:email', async (req, res) => {
+      const result = await toyCarsCollection.find({ sellerEmail: req.params.email }).sort({ price: -1 }).toArray()
+      res.send(result)
+    })
+
     app.get('/getToysByText/:text', async (req, res) => {
       const text = req.params.text
       const result = await toyCarsCollection.find({ name: { $regex: text, $options: "i" } }).toArray()
@@ -72,6 +81,7 @@ async function run() {
     app.post('/toyCars', async (req, res) => {
       const toyInfo = req.body
       // console.log(toyInfo)
+      toyInfo.price = JSON.parse(toyInfo.price)
       const result = await toyCarsCollection.insertOne(toyInfo)
       res.send(result)
     })
