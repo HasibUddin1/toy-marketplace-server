@@ -82,6 +82,7 @@ async function run() {
       const toyInfo = req.body
       // console.log(toyInfo)
       toyInfo.price = JSON.parse(toyInfo.price)
+      toyInfo.rating = JSON.parse(toyInfo.rating)
       const result = await toyCarsCollection.insertOne(toyInfo)
       res.send(result)
     })
