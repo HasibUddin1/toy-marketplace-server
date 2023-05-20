@@ -98,8 +98,8 @@ async function run() {
         $set: {
           picture: toyInfo.picture,
           name: toyInfo.name,
-          price: toyInfo.price,
-          rating: toyInfo.rating,
+          price: JSON.parse(toyInfo.price),
+          rating: JSON.parse(toyInfo.rating),
           sellerName: toyInfo.sellerName,
           sellerEmail: toyInfo.sellerEmail,
           description: toyInfo.description,
