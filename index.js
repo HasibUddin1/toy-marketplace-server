@@ -81,8 +81,8 @@ async function run() {
     app.post('/toyCars', async (req, res) => {
       const toyInfo = req.body
       // console.log(toyInfo)
-      toyInfo.price = JSON.parse(toyInfo.price)
-      toyInfo.rating = JSON.parse(toyInfo.rating)
+      toyInfo.price = parseInt(toyInfo.price)
+      toyInfo.rating = parseInt(toyInfo.rating)
       const result = await toyCarsCollection.insertOne(toyInfo)
       res.send(result)
     })
@@ -98,8 +98,8 @@ async function run() {
         $set: {
           picture: toyInfo.picture,
           name: toyInfo.name,
-          price: JSON.parse(toyInfo.price),
-          rating: JSON.parse(toyInfo.rating),
+          price: parseInt(toyInfo.price),
+          rating: parseInt(toyInfo.rating),
           sellerName: toyInfo.sellerName,
           sellerEmail: toyInfo.sellerEmail,
           description: toyInfo.description,
